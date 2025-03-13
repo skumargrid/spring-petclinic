@@ -452,4 +452,9 @@
       </build>
     </profile>
   </profiles>
+  <scm>
+    <connection>scm:git:git@github.com:skumargrid/spring-petclinic.git</connection>
+    <developerConnection>scm:git:git@github.com:skumargrid/spring-petclinic.git</developerConnection>
+    <url>https://github.com/skumargrid/spring-petclinic</url>
+</scm>
 </project>
