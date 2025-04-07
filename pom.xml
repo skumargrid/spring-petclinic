@@ -11,7 +11,7 @@
 
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.1-SNAPSHOT</version>
   <name>petclinic</name>
 
   <properties>
@@ -22,7 +22,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- Important for reproducible builds. Update using e.g. ./mvnw versions:set
         -DnewVersion=... -->
-    <project.build.outputTimestamp>2025-03-27T07:23:51Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2025-04-07T07:33:39Z</project.build.outputTimestamp>
 
     <!-- Web dependencies -->
     <webjars-locator.version>1.0.1</webjars-locator.version>
@@ -39,13 +39,12 @@
 
   </properties>
 
-   <scm>
-    <connection>scm:git:git://github.com/skumargrid/spring-petclinic.git</connection>
-    <developerConnection>scm:git:ssh://github.com/skumargrid/spring-petclinic.git</developerConnection>
+  <scm>
+    <connection>scm:git:git@github.com:skumargrid/spring-petclinic.git</connection>
+    <developerConnection>scm:git:git@github.com:skumargrid/spring-petclinic.git</developerConnection>
     <url>https://github.com/skumargrid/spring-petclinic</url>
     <tag>v4.0.0</tag>
-  </scm>
-
+</scm>
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
@@ -185,7 +184,34 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
+   
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-release-plugin</artifactId>
+      <version>3.0.1</version>
+      <configuration>
+        <tagNameFormat>v@{project.version}</tagNameFormat>
+        <pushChanges>true</pushChanges>
+        <localCheckout>true</localCheckout>
+        <!-- Force SSH for all operations -->
+        <providerImplementations>
+          <git>jgit</git>
+        </providerImplementations>
+      </configuration>
+    </plugin>     
+     
+    <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-release-plugin</artifactId>
+  <version>3.0.1</version>
+  <configuration>
+    <arguments>-Dmaven.test.skip=true</arguments>
+    <goals>deploy</goals>
+    <preparationGoals>clean verify</preparationGoals>
+  </configuration>
+</plugin>
+
+       <plugin>
         <groupId>io.spring.javaformat</groupId>
         <artifactId>spring-javaformat-maven-plugin</artifactId>
         <version>${spring-format.version}</version>
